@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'cloudinary_storage', 
+    'cloudinary',
+
     # Aplicaciones instaladas e importadas
     'corsheaders',
     'rest_framework',
@@ -89,17 +93,17 @@ DATABASES = {
 }
 
 # Configuración de Almacenamiento de Imágenes (Cloudinary)
-if not DEBUG:
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
-        'API_KEY': os.environ.get('CLOUD_API_KEY'),
-        'API_SECRET': os.environ.get('CLOUD_API_SECRET'),
-    }
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-else:
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUD_NAME', 'ddcxdo1t8'),
+    'API_KEY': os.environ.get('CLOUD_API_KEY', '789841842818279'),
+    'API_SECRET': os.environ.get('CLOUD_API_SECRET', '4lXQ7KI1Lz1Pjac5Xe9PzMf1H9E'),
+}
 
+# Indicamos a Django que use Cloudinary para los archivos multimedia (Media)
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
